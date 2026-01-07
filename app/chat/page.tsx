@@ -78,6 +78,7 @@ export default function ChatPage() {
   const [pipelineMode, setPipelineMode] = useState(false);
   const [productPhotos, setProductPhotos] = useState<ProductPhoto[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [regeneratingIndex, setRegeneratingIndex] = useState<number | null>(null);
 
   const addMessage = (sender: SenderType, text: string, images?: GeneratedImage[]) => {
     const newMessage: Message = {
@@ -274,7 +275,46 @@ export default function ChatPage() {
     link.download = `zennya-pierre-${index}-${Date.now()}.png`;
     link.click();
   };
+  const regenerateImage = async (img: GeneratedImage, messageId: number) => {
+    setRegeneratingIndex(img.index);
 
+    try {
+      const response = await fetch('/api/nanobanana', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt: img.prompt,
+          model: 'gemini-2.5-flash-image'
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setMessages(prev => prev.map(msg => {
+          if (msg.id === messageId && msg.images) {
+            return {
+              ...msg,
+              images: msg.images.map(i =>
+                i.index === img.index
+                  ? { ...i, image: data.image }
+                  : i
+              )
+            };
+          }
+          return msg;
+        }));
+
+        addMessage('SYSTEM', `✅ Image #${img.index} regenerated!`);
+      } else {
+        addMessage('SYSTEM', `❌ Regeneration failed: ${data.error}`);
+      }
+    } catch (error: any) {
+      addMessage('SYSTEM', `❌ Regeneration error: ${error.message}`);
+    } finally {
+      setRegeneratingIndex(null);
+    }
+  };
   return (
     <div className="flex h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 text-white">
       {/* LEFT SIDEBAR */}
@@ -414,14 +454,28 @@ export default function ChatPage() {
                           alt={`Pierre generated ${img.index}`}
                           className="w-full h-full object-cover"
                         />
+                        {regeneratingIndex === img.index && (
+                          <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
+                            <div className="text-white text-sm">🔄 Regenerating...</div>
+                          </div>
+                        )}
                       </div>
                       <p className="text-xs text-gray-400 mb-2 line-clamp-2">{img.prompt.substring(0, 100)}...</p>
-                      <button
-                        onClick={() => downloadImage(img.image.base64, img.image.mimeType, img.index)}
-                        className="w-full bg-yellow-500 hover:bg-yellow-600 text-black text-xs py-2 px-3 rounded transition-all font-semibold"
-                      >
-                        Download #{img.index}
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => regenerateImage(img, msg.id)}
+                          disabled={regeneratingIndex === img.index}
+                          className="flex-1 bg-purple-500 hover:bg-purple-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-xs py-2 px-3 rounded transition-all font-semibold"
+                        >
+                          {regeneratingIndex === img.index ? '🔄' : '🔄 Regenerate'}
+                        </button>
+                        <button
+                          onClick={() => downloadImage(img.image.base64, img.image.mimeType, img.index)}
+                          className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-black text-xs py-2 px-3 rounded transition-all font-semibold"
+                        >
+                          💾 Download
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
