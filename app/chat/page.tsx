@@ -21,6 +21,7 @@ interface Message {
   text: string;
   timestamp: Date;
   images?: GeneratedImage[];
+  productPhotos?: ProductPhoto[];
 }
 
 interface AgentConfig {
@@ -211,8 +212,20 @@ export default function ChatPage() {
 
       // Pierre (NanoBanana) - Images
       if (data.images && data.images.length > 0) {
-        addMessage('SYSTEM', `Pierre generated ${data.images.length} images!`);
-        addMessage('PIERRE', `Generated ${data.images.length} concept visuals`, data.images);
+        if (data.images && data.images.length > 0) {
+          addMessage('SYSTEM', `Pierre generated ${data.images.length} images!`);
+
+          // Create Pierre message with product photos saved
+          const pierreMessage: Message = {
+            id: Date.now() + Math.random(),
+            sender: 'PIERRE',
+            text: `Generated ${data.images.length} concept visuals`,
+            timestamp: new Date(),
+            images: data.images,
+            productPhotos: productPhotos  // ← SAVE THE PHOTOS!
+          };
+          setMessages(prev => [...prev, pierreMessage]);
+        }
       } else {
         addMessage('SYSTEM', '⚠️  No images generated - Alessa may not have created NanoBanana prompts');
       }
@@ -279,12 +292,18 @@ export default function ChatPage() {
     setRegeneratingIndex(img.index);
 
     try {
-      const response = await fetch('/api/nanobanana', {
+      // Find the message to get the product photos
+      const message = messages.find(m => m.id === messageId);
+
+      const response = await fetch('/api/generate-image', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           prompt: img.prompt,
-          model: 'gemini-2.5-flash-image'
+          // Update the model name from gemini-2.5-flash-image
+          // to gemini-3-pro-image-preview for Nano Banana Pro
+          model: 'gemini-3-pro-image-preview',
+          productPhotos: message?.productPhotos || []
         }),
       });
 
@@ -492,7 +511,7 @@ export default function ChatPage() {
             </div>
           )}
         </div>
-
+        x
         {/* Product Photos Preview */}
         {productPhotos.length > 0 && (
           <div className="bg-gray-950/50 border-t border-gray-800/50 px-4 py-2">

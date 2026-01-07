@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { prompt, model = 'gemini-2.5-flash-image' } = body;
+    const { prompt, model = 'gemini-3-pro-image-preview', productPhotos = [] } = body;
 
     console.log('🍌 Pierre (NanoBanana) generating image...');
     console.log('Model:', model);
@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     console.log('Prompt preview:', prompt.substring(0, 150) + '...');
 
     const apiKey = process.env.NANOBANANA_API_KEY;
-    
+
     if (!apiKey) {
       throw new Error('NANOBANANA_API_KEY not set in environment variables');
     }
@@ -22,6 +22,22 @@ export async function POST(request: NextRequest) {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
     console.log('Calling:', url.replace(apiKey, 'KEY_HIDDEN'));
 
+    // Build parts array with prompt and photos
+    const parts: any[] = [{ text: prompt }];
+
+    // Add product photos if provided
+    if (productPhotos && productPhotos.length > 0) {
+      console.log(`📸 Using ${productPhotos.length} product photos in regeneration`);
+      for (const photo of productPhotos) {
+        parts.push({
+          inlineData: {
+            mimeType: photo.mimeType,
+            data: photo.base64
+          }
+        });
+      }
+    }
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -30,11 +46,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         contents: [
           {
-            parts: [
-              {
-                text: prompt
-              }
-            ]
+            parts: parts  // ← Use the parts array with photos!
           }
         ]
       }),
@@ -55,7 +67,7 @@ export async function POST(request: NextRequest) {
 
     // Extract base64 image from response
     const imageData = data.candidates?.[0]?.content?.parts?.find((part: any) => part.inlineData)?.inlineData;
-    
+
     if (!imageData) {
       console.error('Full NanoBanana response:', JSON.stringify(data, null, 2));
       throw new Error('No image returned from NanoBanana');
