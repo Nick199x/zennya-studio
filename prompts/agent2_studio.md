@@ -265,11 +265,8 @@ Tired of cheap diffusers? ✨ Eclipse lasts 10+ years. Silent, waterless. 35% OF
 
 **Required in every prompt:**
 
-1. **Hook Text (Top Third)**
-   - Position: Upper 20% of frame, centered or left-aligned
-   - Typography: Helvetica Neue Bold, 48-72pt
-   - Color: #FFFFFF (on dark) or #000000 (on light)
-   - Example: "Transform Your Space" or "Better Sleep Naturally"
+1. **Describe text as natural scene elements:
+"At the top in large white bold letters reads 'Your Hook Text'"
 
 2. **Body Text (Middle Section)**
    - Position: Center area, avoiding product

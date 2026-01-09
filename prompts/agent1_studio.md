@@ -402,8 +402,8 @@ Answer 3 questions:
   "secondary_products": ["Product Name | none"],
   "content_angle": "visual_drama | hotel_luxury | comparison | etc",
   
-  "hook_concept": "Caption hook (max 15 words) - USER ADDS TEXT MANUALLY",
-  "core_message": "Value prop (1-2 sentences) - USER ADDS TEXT MANUALLY",
+"hook_concept": "Still awake at 3AM? 🌙 Eclipse + Dreams = better sleep",
+"core_message": "Silent waterless tech with natural Lavandin calms your mind instantly",
   
   "product_references": {
     "primary_product_photo": "Eclipse 2.0 product photo (user uploads to NanoBanana)",
@@ -451,7 +451,7 @@ Answer 3 questions:
   },
   
   "caption_brief": {
-    "opening_hook": "First sentence structure (USER ADDS MANUALLY)",
+  "opening_hook": "Still awake at 3AM? Eclipse gives you instant calm",
     "body_focus": ["Benefit 1", "Benefit 2"],
     "objection_handling": "Which objection addressed",
     "cta_style": "soft_invitation | direct_action",
