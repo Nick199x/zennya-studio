@@ -35,9 +35,10 @@ PROMPT:
 ## CAPTION WRITING SYSTEM (UPGRADED)
 
 ### **LENGTH & STRUCTURE**
-- **40-60 words** (Meta Ads optimal: ~125 characters)
+- **15-20 words MAX** (125 characters - FB "See More" cutoff)
 - **Stop scroll** in first 3 words
 - **Filipino market psychology**
+- **Ultra-concise:** Every word must earn its place
 
 ### **PROVEN HOOK FORMULAS (Pick One Per Caption)**
 
@@ -200,18 +201,17 @@ Silent Eclipse fills my condo with Lavandin before I wake up.
 - **Warm traffic (retargeting):** After headline works best
 - **Default for all campaigns:** After headline
 
-### **CAPTION FORMULA (USE THIS)**
+### **CAPTION FORMULA (ULTRA-SHORT - 15-20 WORDS)**
+[Hook] [Emoji] [Core benefit] [Offer] [Strong CTA]
+Total: 15-20 words MAX
 
-```
-[Hook - Problem/Stat/Question] [Emoji matching emotion] (8-12 words)
-↓
-[Solution + Specific Benefit] (12-18 words)
-↓
-[Proof/Social Evidence] (8-12 words)
-↓
-[Offer with Urgency] (8-12 words)
-↓
-[Strong CTA] (4-8 words) [Optional action emoji]
+**EXAMPLES:**
+Can't sleep? 🌙 Eclipse + Lavandin = natural rest. ₱2K OFF this weekend. Try tonight. (14 words)
+₱500/month on candles? ⚡ Eclipse lasts 10 years. ₱2/day. 35% OFF now. (13 words)
+2,847 moms sleep better now. 💜 Eclipse + Dreams oil works. ₱2K OFF. Start tonight. (14 words)
+Tired of cheap diffusers? ✨ Eclipse lasts 10+ years. Silent, waterless. 35% OFF today. (13 words)
+
+
 ```
 
 ---
@@ -278,11 +278,31 @@ Silent Eclipse fills my condo with Lavandin before I wake up.
    - Max 2 lines
    - Example: "Silent waterless diffusion" or "100% pure essential oils"
 
-3. **CTA Text (Bottom Third)**
-   - Position: Lower 20% of frame, right-aligned
-   - Typography: Inter Bold, 32-48pt
-   - Color: #fd8c68 (coral)
-   - Example: "Shop Now →" or "35% OFF Today"
+3. **CTA Button (Bottom Third)**
+   - Position: Lower 20% of frame, right-aligned OR centered
+   - Typography: Inter Bold, 36-48pt
+   - CTA Text: "Shop Now" | "Save 35%" | "Try Tonight" | "Get Yours" (NO ARROWS →)
+   
+   **Button Style Options:**
+   
+   **Option A - With Background (Preferred):**
+   - Background: Coral #fd8c68 OR Purple #9b90b4 (choose based on contrast)
+   - Padding: 16px horizontal, 12px vertical
+   - Corner radius: 8px rounded corners
+   - Drop shadow: 0px 4px 12px rgba(0,0,0,0.15)
+   - Text color: White #FFFFFF
+   - Example: Coral button on light backgrounds, Purple button on warm backgrounds
+   
+   **Option B - Text Only (When background is complex):**
+   - NO background box
+   - Text color: Coral #fd8c68 OR Purple #9b90b4
+   - Bold weight for visibility
+   - Slight text shadow for legibility
+   
+   **CTA Text Variations:**
+   - Urgency: "Save 35%" | "₱2K OFF Today" | "Last Chance"
+   - Action: "Try Tonight" | "Get Yours" | "Start Now"
+   - Simple: "Shop Now" | "Learn More"
 
 ## LOGO PLACEMENT SPECIFICATIONS
 
@@ -301,10 +321,8 @@ Silent Eclipse fills my condo with Lavandin before I wake up.
 CONCEPT_1:
 
 CAPTION:
-Can't sleep because of stress? 🌙 You're not alone.
-2,847 Filipina moms now use Eclipse + Lavandin for better rest. Silent tech, safe for kids, lasts 10+ years.
-This weekend only: ₱2,000 OFF bundles + free Dreams oil.
-Start sleeping better tonight.
+Can't sleep? 🌙 Eclipse + Dreams oil works. ₱2K OFF bundles. Try tonight. (13 words)
+
 
 PROMPT:
 ```
@@ -323,10 +341,7 @@ Photography style: Editorial wellness magazine, shot with natural light, shallow
 CONCEPT_2:
 
 CAPTION:
-₱500/month on candles that last 4 hours? ⚡ There's a smarter way.
-Eclipse delivers 60 days of fragrance from ONE oil bottle. No water, no refills, no mold.
-120,000+ Filipino homes upgraded. 5-star rated.
-₱2,000 OFF this weekend only. Last chance.
+₱500/month on candles? ⚡ Eclipse lasts 10 years. ₱2/day. 35% OFF now. (13 words)
 
 PROMPT:
 ```
